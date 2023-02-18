@@ -3,10 +3,9 @@ package duke;
 import duke.task.Task;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 public class TextUi {
-    private static final String GREET_MESSAGE =
-            "I am Panda, your personal task manager. How may I assist you today?";
-    private static final String USER_INSTRUCTION = "" +
+    private final static String USER_INSTRUCTION = "" +
             "TODO  :  Adds a task to task list    [ Format :  TODO_<TASK_DESCRIPTION> ]" + '\n' +
             "LIST  :  List ALL tasks from task list     [ Format : LIST ]" + '\n' +
             "MARK/UNMARK  :  Mark/Unmark a task from the task list    " +
@@ -20,11 +19,7 @@ public class TextUi {
             "DELETE  :  Remove task from task list    " +
             "[ Format :  DELETE_<TASK_NUMBER> ]" +'\n' +
             "BYE  :  Exits the app" + '\n';
-
-    private static final String EXIT_MESSAGE =
-            "It's great working with you! " + '\n'
-                    + "See you again soon. BYE!!!";
-    private static final String ADD_TASK_MESSAGE =
+    private final static String ADD_TASK_MESSAGE =
             "Nice! I've added this task to your task list :" ;
     private static final String MARK_TASK_MESSAGE =
             "Well Done!!! I've marked this task as done :";
@@ -32,35 +27,22 @@ public class TextUi {
             "Alright. I've marked this task as undone :";
     private static final String DELETE_TASK_MESSAGE =
             "NOTED. I've removed this task from your task list :";
-    private static final String FIND_TASK_MESSAGE =
-            "Here are some similar tasks I have found in your task list:";
-
-    private static final String TOTAL_COUNT_START_MESSAGE =
-            "Now you have ";
-
-    private static final String TOTAL_COUNT_END_MESSAGE =
-            " tasks in your task list.";
-
-    private static final String TASKLIST_START_MESSAGE =
-            "These are the tasks in your task list :";
-
-    private static final String NO_SUCH_FILE_MESSAGE =
-            "There is no existing file in your computer.";
+    private static final String FIND_TASK_MESSAGE = "Here are some similar tasks I have found in your task list:";
 
     public String showGreetMessage() {
-        return GREET_MESSAGE;
+        return "I am Panda, your personal task manager. How may I assist you today?";
     }
 
     public String readUserCommand() {
         Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Commands :");
         String userCommand = sc.nextLine();
         return userCommand;
     }
 
     public String showTotalCountMessage(TaskList taskList) {
-        return TOTAL_COUNT_START_MESSAGE
-                + taskList.getList().size()
-                + TOTAL_COUNT_END_MESSAGE;
+        return "Now you have " + taskList.getList().size() +
+                " tasks in your task list.";
     }
 
     public String showAddTaskMessage(Task task) {
@@ -84,7 +66,7 @@ public class TextUi {
     }
 
     public String showTaskList(TaskList taskslist) {
-        String taskList = TASKLIST_START_MESSAGE + '\n';
+        String taskList = "These are the tasks in your task list :" + '\n';
         for (Task task : taskslist.getList()) {
             taskList += "" + task + '\n';
         }
@@ -97,7 +79,7 @@ public class TextUi {
     }
 
     public String showLoadingError() {
-        return NO_SUCH_FILE_MESSAGE;
+        return "There is no existing file in your computer.";
     }
 
     public String showErrorMessage(String m) {
@@ -105,7 +87,8 @@ public class TextUi {
     }
 
     public String showExitMessage() {
-        return EXIT_MESSAGE;
+        return "It's great working with you! "
+                + "See you again soon. BYE!!!";
     }
 
 }
